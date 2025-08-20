@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heavenly Portal</title>
+    <title>$YZY</title>
+    <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68a6456e0c2c84673dbec816_ChatGPT_Image_Aug_20__2025__10_58_45_PM-removebg.png">
     <style>
         * {
             margin: 0;
@@ -47,8 +48,6 @@
             pointer-events: none;
         }
 
-
-
         .main-image {
             position: relative;
             z-index: 3;
@@ -58,7 +57,6 @@
             max-width: 300px;
             width: 90%;
             height: auto;
-            filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.5));
         }
 
         .button-container {
@@ -83,46 +81,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            padding: 12px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: none;
+            border: none;
         }
 
         .enter-text:hover, .buy-button:hover {
             transform: translateY(-5px) scale(1.05);
             text-shadow: 0 4px 20px rgba(255, 255, 255, 1);
             letter-spacing: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
-        }
-
-        .buy-button {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
-        }
-
-        .next-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: white;
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .next-page.active {
-            transform: translateY(0);
-        }
-
-        .next-page iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
         }
 
         .sparkles {
@@ -150,24 +116,98 @@
         .sparkle5 { top: 50%; left: 90%; animation-delay: 3s; }
         .sparkle6 { top: 40%; left: 10%; animation-delay: 1.8s; }
 
+        .glow-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: gentlePulse 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .yeezy-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            color: white;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .yeezy-section.active {
+            transform: translateY(0);
+        }
+
+        .yeezy-content h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            letter-spacing: 8px;
+        }
+
+        .yeezy-content p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .yeezy-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .yeezy-link:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: white;
+            color: black;
+        }
+
         @keyframes breathFloat {
             0%, 100% {
                 transform: translateY(0) scale(1);
-                filter: drop-shadow(0 20px 40px rgba(255, 255, 255, 0.8));
-                box-shadow: 
-                    0 0 50px rgba(255, 255, 255, 0.8),
-                    0 0 100px rgba(255, 255, 255, 0.6),
-                    0 0 150px rgba(255, 255, 255, 0.4),
-                    inset 0 0 30px rgba(255, 255, 255, 0.3);
             }
             50% {
                 transform: translateY(-25px) scale(1.05);
-                filter: drop-shadow(0 30px 60px rgba(255, 255, 255, 1));
-                box-shadow: 
-                    0 0 80px rgba(255, 255, 255, 1),
-                    0 0 150px rgba(255, 255, 255, 0.8),
-                    0 0 200px rgba(255, 255, 255, 0.6),
-                    inset 0 0 50px rgba(255, 255, 255, 0.5);
             }
         }
 
@@ -193,27 +233,6 @@
             }
         }
 
-        @keyframes cloudFloat {
-            0% {
-                transform: translateX(-120px);
-            }
-            100% {
-                transform: translateX(calc(100vw + 120px));
-            }
-        }
-
-        @keyframes cloudFade {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.7;
-            }
-            100% {
-                opacity: 0.3;
-            }
-        }
-
         @keyframes sparkleAnimation {
             0%, 100% {
                 opacity: 0;
@@ -223,20 +242,6 @@
                 opacity: 1;
                 transform: scale(1);
             }
-        }
-
-        /* Gentle pulsing glow effect */
-        .glow-pulse {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: gentlePulse 6s ease-in-out infinite;
-            z-index: 1;
         }
 
         @keyframes gentlePulse {
@@ -263,11 +268,19 @@
             .enter-text, .buy-button {
                 font-size: 1rem;
                 letter-spacing: 2px;
-                padding: 10px 20px;
             }
             
             .enter-text:hover, .buy-button:hover {
                 letter-spacing: 3px;
+            }
+
+            .yeezy-content h1 {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+
+            .yeezy-content p {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -286,23 +299,33 @@
         </div>
         
         <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68a6456e0c2c84673dbec816_ChatGPT_Image_Aug_20__2025__10_58_45_PM-removebg.png" 
-             alt="Heavenly Image" 
+             alt="$YZY Coin" 
              class="main-image">
         
         <div class="button-container">
-            <div class="enter-text" onclick="enterNextPage()">enter</div>
+            <div class="enter-text" onclick="enterYeezySection()">enter</div>
             <a href="https://pump.fun" target="_blank" class="buy-button">buy-$yzy</a>
         </div>
     </div>
 
-    <div class="next-page" id="nextPage">
-        <iframe src="https://yeezy.com/" title="Yeezy Website"></iframe>
+    <div class="yeezy-section" id="yeezySection">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <div class="yeezy-content">
+            <h1>YEEZY</h1>
+            <p>Experience the vision</p>
+            <a href="https://yeezy.com" target="_blank" class="yeezy-link">Visit Yeezy.com</a>
+        </div>
     </div>
 
     <script>
-        function enterNextPage() {
-            const nextPage = document.getElementById('nextPage');
-            nextPage.classList.add('active');
+        function enterYeezySection() {
+            const yeezySection = document.getElementById('yeezySection');
+            yeezySection.classList.add('active');
+        }
+
+        function goBack() {
+            const yeezySection = document.getElementById('yeezySection');
+            yeezySection.classList.remove('active');
         }
     </script>
 </body>
