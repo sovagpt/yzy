@@ -304,7 +304,16 @@
     </div>
 
     <div class="twitter-section" id="twitterSection">
-        <iframe src="https://x.com/YZY_MNY" title="YZY_MNY Twitter"></iframe>
+        <div style="padding: 40px; text-align: center; color: white; background: #000; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            <h2 style="font-size: 2rem; margin-bottom: 20px; letter-spacing: 4px;">YZY_MNY</h2>
+            <p style="margin-bottom: 30px; opacity: 0.8;">Twitter/X cannot be displayed in iframe due to security restrictions.</p>
+            <a href="https://x.com/YZY_MNY" target="_blank" style="color: #1DA1F2; text-decoration: none; font-size: 1.2rem; border: 1px solid #1DA1F2; padding: 15px 30px; display: inline-block; transition: all 0.3s ease;" 
+               onmouseover="this.style.background='#1DA1F2'; this.style.color='white';" 
+               onmouseout="this.style.background='transparent'; this.style.color='#1DA1F2';">
+                Visit @YZY_MNY on X
+            </a>
+            <button onclick="goBack()" style="position: absolute; top: 30px; left: 30px; background: none; border: 1px solid white; color: white; padding: 10px 20px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px;">← Back</button>
+        </div>
     </div>
 
     <script>
@@ -318,10 +327,10 @@
             twitterSection.classList.remove('active');
         }
 
-        // Cryptic countdown timer - set for 1 hour from now
+        // Cryptic countdown timer - set for universal time everyone sees the same
         function updateCountdown() {
-            const now = new Date();
-            const targetDate = new Date(now.getTime() + (60 * 60 * 1000)); // Add 1 hour in milliseconds
+            // Set a specific target time: August 21, 2025 at 00:20 UTC (20 minutes past midnight)
+            const targetDate = new Date('2025-08-21T00:20:00Z');
             
             const currentTime = new Date().getTime();
             const timeLeft = targetDate.getTime() - currentTime;
