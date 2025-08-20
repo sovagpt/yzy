@@ -63,12 +63,44 @@
             position: relative;
             z-index: 4;
             display: flex;
-            gap: 40px;
+            flex-direction: column;
+            gap: 15px;
             align-items: center;
             opacity: 0;
             transform: translateY(20px);
             animation: textAppear 1.5s ease-out 3.5s forwards;
             margin-top: 40px;
+        }
+
+        .main-buttons {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .countdown-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .launching-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.7rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-timer {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+            animation: mysticalGlow 3s ease-in-out infinite alternate;
         }
 
         .enter-text, .buy-button {
@@ -129,7 +161,7 @@
             z-index: 1;
         }
 
-        .yeezy-section {
+        .twitter-section {
             position: fixed;
             top: 0;
             left: 0;
@@ -140,66 +172,16 @@
             z-index: 1000;
             transform: translateY(100%);
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
         }
 
-        .yeezy-section.active {
+        .twitter-section.active {
             transform: translateY(0);
         }
 
-        .yeezy-content h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            letter-spacing: 8px;
-        }
-
-        .yeezy-content p {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-        }
-
-        .yeezy-link {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-
-        .yeezy-link:hover {
-            background: #f0f0f0;
-            transform: scale(1.05);
-        }
-
-        .back-button {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            background: none;
-            border: 1px solid white;
-            color: white;
-            padding: 10px 20px;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            background: white;
-            color: black;
+        .twitter-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         @keyframes breathFloat {
@@ -255,12 +237,28 @@
             }
         }
 
+        @keyframes mysticalGlow {
+            0% {
+                text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+                opacity: 0.8;
+            }
+            100% {
+                text-shadow: 0 2px 15px rgba(255, 255, 255, 0.9);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .main-image {
                 max-width: 250px;
             }
             
             .button-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .main-buttons {
                 flex-direction: column;
                 gap: 20px;
             }
@@ -272,15 +270,6 @@
             
             .enter-text:hover, .buy-button:hover {
                 letter-spacing: 3px;
-            }
-
-            .yeezy-content h1 {
-                font-size: 2.5rem;
-                letter-spacing: 4px;
-            }
-
-            .yeezy-content p {
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -303,30 +292,60 @@
              class="main-image">
         
         <div class="button-container">
-            <div class="enter-text" onclick="enterYeezySection()">enter</div>
-            <a href="https://pump.fun" target="_blank" class="buy-button">buy-$yzy</a>
+            <div class="main-buttons">
+                <div class="enter-text" onclick="enterTwitter()">enter</div>
+                <a href="https://pump.fun" target="_blank" class="buy-button">buy-$yzy</a>
+            </div>
+            <div class="countdown-container">
+                <div class="launching-text">launching soon</div>
+                <div class="countdown-timer" id="countdown">00:00:00:00</div>
+            </div>
         </div>
     </div>
 
-    <div class="yeezy-section" id="yeezySection">
-        <button class="back-button" onclick="goBack()">← Back</button>
-        <div class="yeezy-content">
-            <h1>YEEZY</h1>
-            <p>Experience the vision</p>
-            <a href="https://yeezy.com" target="_blank" class="yeezy-link">Visit Yeezy.com</a>
-        </div>
+    <div class="twitter-section" id="twitterSection">
+        <iframe src="https://x.com/YZY_MNY" title="YZY_MNY Twitter"></iframe>
     </div>
 
     <script>
-        function enterYeezySection() {
-            const yeezySection = document.getElementById('yeezySection');
-            yeezySection.classList.add('active');
+        function enterTwitter() {
+            const twitterSection = document.getElementById('twitterSection');
+            twitterSection.classList.add('active');
         }
 
         function goBack() {
-            const yeezySection = document.getElementById('yeezySection');
-            yeezySection.classList.remove('active');
+            const twitterSection = document.getElementById('twitterSection');
+            twitterSection.classList.remove('active');
         }
+
+        // Cryptic countdown timer - set for 1 hour from now
+        function updateCountdown() {
+            const targetDate = new Date();
+            targetDate.setHours(targetDate.getHours() + 1);
+            
+            const now = new Date().getTime();
+            const timeLeft = targetDate.getTime() - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                const countdownElement = document.getElementById('countdown');
+                countdownElement.textContent = 
+                    `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                document.getElementById('countdown').textContent = '00:00:00:00';
+                document.querySelector('.launching-text').textContent = 'the time has come';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Initialize countdown immediately
+        updateCountdown();
     </script>
 </body>
 </html>
