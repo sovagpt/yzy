@@ -95,7 +95,7 @@
 
         .countdown-timer {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
+            font-size: 1.4rem;
             font-weight: 300;
             letter-spacing: 3px;
             font-family: 'Courier New', monospace;
@@ -320,24 +320,29 @@
 
         // Cryptic countdown timer - set for 1 hour from now
         function updateCountdown() {
-            const targetDate = new Date();
-            targetDate.setHours(targetDate.getHours() + 1);
+            const now = new Date();
+            const targetDate = new Date(now.getTime() + (60 * 60 * 1000)); // Add 1 hour in milliseconds
             
-            const now = new Date().getTime();
-            const timeLeft = targetDate.getTime() - now;
+            const currentTime = new Date().getTime();
+            const timeLeft = targetDate.getTime() - currentTime;
+            
+            console.log('Time left:', timeLeft); // Debug log
             
             if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
                 
                 const countdownElement = document.getElementById('countdown');
-                countdownElement.textContent = 
-                    `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                if (countdownElement) {
+                    countdownElement.textContent = 
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
             } else {
-                document.getElementById('countdown').textContent = '00:00:00:00';
-                document.querySelector('.launching-text').textContent = 'the time has come';
+                const countdownElement = document.getElementById('countdown');
+                const launchingElement = document.querySelector('.launching-text');
+                if (countdownElement) countdownElement.textContent = '00:00:00';
+                if (launchingElement) launchingElement.textContent = 'the time has come';
             }
         }
 
