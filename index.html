@@ -54,34 +54,81 @@
             z-index: 3;
             opacity: 0;
             transform: translateY(30px) scale(0.8);
-            animation: imageAppear 2s ease-out 1s forwards;
+            animation: imageAppear 2s ease-out 1s forwards, breathFloat 3s ease-in-out 3s infinite;
             max-width: 300px;
             width: 90%;
             height: auto;
-            filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.5));
+            filter: drop-shadow(0 20px 40px rgba(255, 255, 255, 0.8));
+            border-radius: 50%;
+            box-shadow: 
+                0 0 50px rgba(255, 255, 255, 0.8),
+                0 0 100px rgba(255, 255, 255, 0.6),
+                0 0 150px rgba(255, 255, 255, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
         }
 
-        .enter-text {
+        .button-container {
             position: relative;
             z-index: 4;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textAppear 1.5s ease-out 3.5s forwards;
+            margin-top: 40px;
+        }
+
+        .enter-text, .buy-button {
             color: rgba(255, 255, 255, 0.9);
             font-size: 1.2rem;
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: textAppear 1.5s ease-out 3.5s forwards;
-            margin-top: 40px;
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .enter-text:hover {
-            transform: translateY(15px) scale(1.05);
+        .enter-text:hover, .buy-button:hover {
+            transform: translateY(-5px) scale(1.05);
             text-shadow: 0 4px 20px rgba(255, 255, 255, 1);
             letter-spacing: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+        }
+
+        .next-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .next-page.active {
+            transform: translateY(0);
+        }
+
+        .next-page iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .sparkles {
@@ -108,6 +155,27 @@
         .sparkle4 { top: 80%; left: 30%; animation-delay: 0.5s; }
         .sparkle5 { top: 50%; left: 90%; animation-delay: 3s; }
         .sparkle6 { top: 40%; left: 10%; animation-delay: 1.8s; }
+
+        @keyframes breathFloat {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                filter: drop-shadow(0 20px 40px rgba(255, 255, 255, 0.8));
+                box-shadow: 
+                    0 0 50px rgba(255, 255, 255, 0.8),
+                    0 0 100px rgba(255, 255, 255, 0.6),
+                    0 0 150px rgba(255, 255, 255, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                transform: translateY(-25px) scale(1.05);
+                filter: drop-shadow(0 30px 60px rgba(255, 255, 255, 1));
+                box-shadow: 
+                    0 0 80px rgba(255, 255, 255, 1),
+                    0 0 150px rgba(255, 255, 255, 0.8),
+                    0 0 200px rgba(255, 255, 255, 0.6),
+                    inset 0 0 50px rgba(255, 255, 255, 0.5);
+            }
+        }
 
         @keyframes imageAppear {
             0% {
@@ -193,12 +261,18 @@
                 max-width: 250px;
             }
             
-            .enter-text {
-                font-size: 1rem;
-                letter-spacing: 2px;
+            .button-container {
+                flex-direction: column;
+                gap: 20px;
             }
             
-            .enter-text:hover {
+            .enter-text, .buy-button {
+                font-size: 1rem;
+                letter-spacing: 2px;
+                padding: 10px 20px;
+            }
+            
+            .enter-text:hover, .buy-button:hover {
                 letter-spacing: 3px;
             }
         }
@@ -207,11 +281,6 @@
 <body>
     <div class="heavenly-container">
         <div class="glow-pulse"></div>
-        
-        <div class="floating-clouds">
-            <div class="cloud cloud1"></div>
-            <div class="cloud cloud2"></div>
-        </div>
         
         <div class="sparkles">
             <div class="sparkle sparkle1"></div>
@@ -226,7 +295,21 @@
              alt="Heavenly Image" 
              class="main-image">
         
-        <div class="enter-text">enter</div>
+        <div class="button-container">
+            <div class="enter-text" onclick="enterNextPage()">enter</div>
+            <a href="https://pump.fun" target="_blank" class="buy-button">buy-$yzy</a>
+        </div>
     </div>
+
+    <div class="next-page" id="nextPage">
+        <iframe src="https://yeezy.com/" title="Yeezy Website"></iframe>
+    </div>
+
+    <script>
+        function enterNextPage() {
+            const nextPage = document.getElementById('nextPage');
+            nextPage.classList.add('active');
+        }
+    </script>
 </body>
 </html>
